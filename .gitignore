@@ -4,3 +4,6 @@ obj/
 .vs/
 .idea/
 dist/
+CLAUDE.md
+release.ps1
+release.sh
