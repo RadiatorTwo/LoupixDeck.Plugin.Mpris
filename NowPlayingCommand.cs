@@ -52,16 +52,15 @@ internal sealed class MprisArtworkCommand(
 
             if (cover is not null)
             {
+                // The cover speaks for itself; track and artist stay on their own display commands.
                 canvas.DrawImage(cover, 0, 0, canvas.Width, canvas.Height);
-                // The cover keeps its own colors, so the text needs a darker band behind it.
-                canvas.FillRectangle(0, canvas.Height - 34, canvas.Width, 34, PluginColor.FromRgb(0, 0, 0) with { A = 190 });
             }
             else
             {
                 canvas.DrawSymbol("music", canvas.Width / 4, 6, canvas.Width / 2, canvas.Width / 2, Muted);
+                DrawTrack(canvas, state);
             }
 
-            DrawTrack(canvas, state);
             DrawProgress(canvas, state);
             return true;
         }

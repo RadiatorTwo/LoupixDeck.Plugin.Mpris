@@ -56,7 +56,7 @@ One
 03:42 / 07:27
 ```
 
-`Mpris.Artwork` draws the cover with the track and a progress bar. Single values are
+`Mpris.Artwork` draws the cover with a progress bar; the title is only drawn when no cover is available, so the cover itself stays unobstructed. Single values are
 available as `Mpris.PlayerName`, `Mpris.Status`, `Mpris.Title`, `Mpris.Artist`,
 `Mpris.Album`, `Mpris.Position`, `Mpris.Duration`, `Mpris.Progress`, `Mpris.Volume`,
 `Mpris.Shuffle`, `Mpris.Repeat` and `Mpris.PlayerAvailable`. Pressing any of them
