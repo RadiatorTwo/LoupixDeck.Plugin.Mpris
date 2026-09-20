@@ -1,0 +1,12 @@
+{
+  "id": "mprismedia",
+  "name": "MPRISMedia",
+  "version": "1.0.0",
+  "sdkVersion": "1.24",
+  "entryAssembly": "LoupixDeck.Plugin.MPRISMedia.dll",
+  "platform": "All",
+  "author": "",
+  "description": "",
+  "projectUrl": "",
+  "iconFile": ""
+}
