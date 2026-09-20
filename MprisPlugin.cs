@@ -8,8 +8,14 @@ namespace LoupixDeck.Plugin.Mpris;
 /// </summary>
 public sealed class MprisPlugin : LoupixPlugin, IMenuContributor, IPluginSettingsPage
 {
+    /// <summary>A player can push several property changes at once, so redraws are coalesced.</summary>
+    private static readonly TimeSpan RefreshDelay = TimeSpan.FromMilliseconds(200);
+
     private readonly List<IPluginCommand> _commands = [];
     private readonly List<string> _displayCommandNames = [];
+    private readonly Lock _refreshGate = new();
+
+    private Timer? _refreshTimer;
 
     private IPluginHost? _host;
     private MprisConnection? _connection;
@@ -54,6 +60,8 @@ public sealed class MprisPlugin : LoupixPlugin, IMenuContributor, IPluginSetting
             _settingsPage = new MprisSettingsPage(registry, selection, settings, host);
 
             BuildCommands(host, settings, selection, positions, artwork, registry);
+
+            _refreshTimer = new Timer(_ => PushRefresh(), null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
 
             registry.PlayerUpdated += OnPlayerUpdated;
             registry.PlayersChanged += RefreshDisplays;
@@ -145,6 +153,8 @@ public sealed class MprisPlugin : LoupixPlugin, IMenuContributor, IPluginSetting
             _artwork.ArtworkLoaded -= RefreshDisplays;
         }
 
+        _refreshTimer?.Dispose();
+        _refreshTimer = null;
         _commands.Clear();
         _displayCommandNames.Clear();
         _positions?.Dispose();
@@ -205,10 +215,18 @@ public sealed class MprisPlugin : LoupixPlugin, IMenuContributor, IPluginSetting
     private void OnPlayerUpdated(PlayerState state) => RefreshDisplays();
 
     /// <summary>
-    /// Pushes a redraw of every display command. A player pushes its changes through D-Bus, so
-    /// the button must not wait for the next polling interval.
+    /// Asks for a redraw of the display commands. A player often sends several properties in a
+    /// row, so the requests are coalesced into one push shortly afterwards.
     /// </summary>
     private void RefreshDisplays()
+    {
+        lock (_refreshGate)
+        {
+            _refreshTimer?.Change(RefreshDelay, Timeout.InfiniteTimeSpan);
+        }
+    }
+
+    private void PushRefresh()
     {
         IPluginHost? host = _host;
         if (host is null)
