@@ -1,15 +1,15 @@
 using LoupixDeck.PluginSdk;
 
-namespace LoupixDeck.Plugin.MPRISMedia;
+namespace LoupixDeck.Plugin.Mpris;
 
-public sealed class MPRISMediaPlugin : LoupixPlugin
+public sealed class MprisPlugin : LoupixPlugin
 {
     private IPluginHost? _host;
 
     public override PluginMetadata Metadata { get; } = new()
     {
-        Id = "mprismedia",
-        Name = "MPRISMedia",
+        Id = "mpris",
+        Name = "MPRIS Media",
         Version = new Version(1, 0, 0),
         SdkVersion = new Version(1, 24, 0),
         Author = "",
