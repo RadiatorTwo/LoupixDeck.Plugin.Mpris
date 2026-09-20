@@ -117,7 +117,6 @@
   "Volume step in percent": "Lautstärkeschritt in Prozent",
   "Used by the volume commands that do not carry their own step.": "Wird von den Lautstärke-Befehlen ohne eigene Schrittweite verwendet.",
   "Load artwork from the internet": "Cover aus dem Internet laden",
-  "Download cover art that a player publishes as an http address. Local cover files are always used.": "Cover herunterladen, die ein Player als http-Adresse veröffentlicht. Lokale Cover-Dateien werden immer verwendet.",
   "List running players": "Laufende Player auflisten",
   "Clear the preferred player": "Bevorzugten Player löschen",
   "Playing": "Spielt",
@@ -135,5 +134,6 @@
   "Media Players": "Medienplayer",
   "The preferred player was cleared.": "Der bevorzugte Player wurde gelöscht.",
   "No player is running.": "Es läuft kein Player.",
-  "{0} player(s) running:": "{0} Player laufen:"
+  "{0} player(s) running:": "{0} Player laufen:",
+  "Download cover art that a player publishes as an http address, which is how Spotify and the browsers publish it. Local cover files are always used.": "Cover herunterladen, die ein Player als http-Adresse veröffentlicht — so liefern Spotify und die Browser sie. Lokale Cover-Dateien werden immer verwendet."
 }

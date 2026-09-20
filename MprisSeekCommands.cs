@@ -26,7 +26,7 @@ internal sealed class MprisSeekCommand : MprisCommandBase
             CommandName = forward ? "Mpris.SeekForward" : "Mpris.SeekBackward",
             DisplayName = forward ? "Media: Seek Forward" : "Media: Seek Backward",
             Group = "Media",
-            Icon = forward ? "\U000F0211" : "\U000F0213",
+            Icon = forward ? "\U000F0211" : "\U000F045F",
             Description = forward
                 ? "Jump forward in the current track"
                 : "Jump backward in the current track",
@@ -44,7 +44,7 @@ internal sealed class MprisSeekCommand : MprisCommandBase
             return;
         }
 
-        int seconds = Math.Abs(MprisParameters.ReadNumber(ctx, 2, _settings.SeekStepSeconds));
+        int seconds = MprisParameters.ReadStep(ctx, 2, _settings.SeekStepSeconds);
         TimeSpan offset = TimeSpan.FromSeconds(seconds * _sign);
 
         if (!await player.SeekAsync(offset).ConfigureAwait(false))

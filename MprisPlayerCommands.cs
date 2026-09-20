@@ -10,7 +10,7 @@ internal sealed class MprisSelectPlayerCommand(Func<PlayerFolderProvider> folder
         CommandName = "Mpris.SelectPlayer",
         DisplayName = "Media: Select Player",
         Group = "Media",
-        Icon = "\U000F0387",
+        Icon = "\U000F0770",
         Description = "Open the list of running media players and pick the preferred one"
     };
 
@@ -43,7 +43,7 @@ internal sealed class MprisSetPreferredPlayerCommand(
         CommandName = "Mpris.SetPreferredPlayer",
         DisplayName = "Media: Set Preferred Player",
         Group = "Media",
-        Icon = "\U000F0389",
+        Icon = "\U000F04CE",
         Description = "Make the selected player the preferred one",
         ParameterTemplate = MprisParameters.PlayerTemplate,
         Parameters = MprisParameters.PlayerParameters

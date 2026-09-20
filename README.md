@@ -30,8 +30,8 @@ log entry — unless *Fall back when the selected player is unavailable* is on.
 `Mpris.PlayPause` / `Mpris.Play` / `Mpris.Pause` / `Mpris.Stop` / `Mpris.Next` /
 `Mpris.Previous` — the transport controls.
 
-`Mpris.SeekForward` / `Mpris.SeekBackward` — jump by a step that defaults to the
-setting and is editable per assignment. `Mpris.SeekToPosition` jumps to an absolute
+`Mpris.SeekForward` / `Mpris.SeekBackward` — jump by a step that is editable per
+assignment; an empty or zero step falls back to the one from the settings. `Mpris.SeekToPosition` jumps to an absolute
 position in seconds.
 
 `Mpris.VolumeUp` / `Mpris.VolumeDown` / `Mpris.SetVolume` — only for players that
@@ -77,9 +77,10 @@ play/pause). The same pairs are available per strategy in the command menu as
 
 Preferred player, automatic selection, fallback when the selected player is
 unavailable, showing browser players, the default seek and volume steps, and whether
-cover art may be downloaded over http. Local cover files are always used; artwork is
-cached with a size limit and an LRU eviction, and a track without a usable cover
-falls back to a neutral media symbol.
+cover art may be downloaded over http — on by default, because Spotify and the
+browsers publish their covers that way. Local cover files are always used; artwork is
+cached with a size limit and an LRU eviction, and a track without a usable cover falls
+back to a neutral media symbol.
 
 ## Build
 

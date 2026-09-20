@@ -115,6 +115,10 @@ internal sealed class ArtworkCache(MprisSettings settings, IPluginLogger logger)
     {
         byte[]? bytes = null;
 
+        // A download the settings currently forbid is not remembered, so switching the setting on
+        // shows the cover right away instead of keeping a cached failure.
+        bool remember = true;
+
         try
         {
             string? path = ToLocalPath(artUrl);
@@ -127,6 +131,10 @@ internal sealed class ArtworkCache(MprisSettings settings, IPluginLogger logger)
             {
                 bytes = await DownloadAsync(artUrl).ConfigureAwait(false);
             }
+            else
+            {
+                remember = false;
+            }
         }
         catch (Exception ex)
         {
@@ -134,7 +142,14 @@ internal sealed class ArtworkCache(MprisSettings settings, IPluginLogger logger)
         }
         finally
         {
-            Store(key, bytes);
+            if (remember)
+            {
+                Store(key, bytes);
+            }
+            else
+            {
+                Forget(key);
+            }
         }
 
         if (bytes is not null)
@@ -209,6 +224,26 @@ internal sealed class ArtworkCache(MprisSettings settings, IPluginLogger logger)
                     _bytes -= removed.LongLength;
                 }
             }
+        }
+    }
+
+    /// <summary>Drops a pending load without caching its result.</summary>
+    private void Forget(string key)
+    {
+        lock (_gate)
+        {
+            _loading.Remove(key);
+        }
+    }
+
+    /// <summary>Empties the cache, for example after the artwork settings changed.</summary>
+    public void Clear()
+    {
+        lock (_gate)
+        {
+            _entries.Clear();
+            _order.Clear();
+            _bytes = 0;
         }
     }
 

@@ -43,7 +43,7 @@ internal sealed class MprisVolumeStepCommand : MprisCommandBase
             return;
         }
 
-        int step = Math.Abs(MprisParameters.ReadNumber(ctx, 2, _settings.VolumeStepPercent));
+        int step = MprisParameters.ReadStep(ctx, 2, _settings.VolumeStepPercent);
         double current = state.Volume ?? 0.0;
         double next = Math.Clamp(current + (step * _sign / 100.0), 0.0, 1.0);
 

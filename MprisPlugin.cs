@@ -136,7 +136,9 @@ public sealed class MprisPlugin : LoupixPlugin, IMenuContributor, IPluginSetting
 
     public void OnSettingsSaved()
     {
-        // Every setting is read on demand, so the saved values only need a redraw.
+        // Every setting is read on demand. Only the artwork cache holds derived data, and it has
+        // to go so a newly allowed download is attempted again.
+        _artwork?.Clear();
         RefreshDisplays();
     }
 

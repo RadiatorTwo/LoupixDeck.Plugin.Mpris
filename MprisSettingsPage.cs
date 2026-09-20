@@ -86,8 +86,8 @@ internal sealed class MprisSettingsPage(
             Key = MprisSettings.HttpArtworkKey,
             Label = "Load artwork from the internet",
             Kind = PluginSettingKind.Toggle,
-            Description = "Download cover art that a player publishes as an http address. Local cover files are always used.",
-            DefaultValue = false
+            Description = "Download cover art that a player publishes as an http address, which is how Spotify and the browsers publish it. Local cover files are always used.",
+            DefaultValue = true
         }
     ];
 

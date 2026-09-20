@@ -35,7 +35,7 @@ internal sealed class MprisSettings(IPluginSettings settings)
 
     public bool ShowBrowserPlayers => settings.Get(ShowBrowserPlayersKey, true);
 
-    public bool HttpArtwork => settings.Get(HttpArtworkKey, false);
+    public bool HttpArtwork => settings.Get(HttpArtworkKey, true);
 
     /// <summary>Fall back to the automatic player when the selected one is not running.</summary>
     public bool FallbackWhenUnavailable => settings.Get(FallbackWhenUnavailableKey, false);

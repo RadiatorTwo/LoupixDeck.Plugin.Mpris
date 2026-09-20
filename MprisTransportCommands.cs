@@ -11,7 +11,7 @@ internal sealed class MprisPlayPauseCommand(PlayerSelectionService selection, IP
         CommandName = "Mpris.PlayPause",
         DisplayName = "Media: Play/Pause",
         Group = "Media",
-        Icon = "\U000F040C",
+        Icon = "\U000F040A",
         Description = "Toggle playback of the selected media player",
         ParameterTemplate = MprisParameters.PlayerTemplate,
         Parameters = MprisParameters.PlayerParameters

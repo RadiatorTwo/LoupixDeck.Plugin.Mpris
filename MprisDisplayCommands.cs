@@ -84,7 +84,7 @@ internal static class MprisDisplayCommands
 
         yield return new MprisTextDisplayCommand(
             selection, logger,
-            "Mpris.Status", "Media: Playback Status", "Show whether the player is playing, paused or stopped", "\U000F040C",
+            "Mpris.Status", "Media: Playback Status", "Show whether the player is playing, paused or stopped", "\U000F040A",
             (state, host) => host.Tr(PlaybackStatusParser.ToEnglishText(state?.Status ?? PlaybackStatus.Unknown)));
 
         yield return new MprisTextDisplayCommand(
@@ -99,12 +99,12 @@ internal static class MprisDisplayCommands
 
         yield return new MprisTextDisplayCommand(
             selection, logger,
-            "Mpris.Album", "Media: Album", "Show the album of the current track", "\U000F00C2",
+            "Mpris.Album", "Media: Album", "Show the album of the current track", "\U000F02E9",
             (state, host) => state?.Metadata.Album ?? NoPlayer(host, state));
 
         yield return new MprisTextDisplayCommand(
             selection, logger,
-            "Mpris.NowPlaying", "Media: Now Playing", "Show status, artist, title and position of the selected player", "\U000F0388",
+            "Mpris.NowPlaying", "Media: Now Playing", "Show status, artist, title and position of the selected player", "\U000F075A",
             (state, host) => FormatNowPlaying(state, host, positions));
 
         yield return new MprisTextDisplayCommand(
@@ -119,7 +119,7 @@ internal static class MprisDisplayCommands
 
         yield return new MprisTextDisplayCommand(
             selection, logger,
-            "Mpris.Progress", "Media: Progress", "Show how far the current track has played, in percent", "\U000F0BFA",
+            "Mpris.Progress", "Media: Progress", "Show how far the current track has played, in percent", "\U000F0954",
             (state, host) => state is null ? NoPlayer(host) : FormatProgress(state, positions));
 
         yield return new MprisTextDisplayCommand(
