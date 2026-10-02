@@ -34,8 +34,20 @@ public sealed class MprisPlugin : LoupixPlugin, IMenuContributor, IPluginSetting
         Version = new Version(1, 0, 0),
         SdkVersion = new Version(1, 24, 0),
         Author = "RadiatorTwo",
-        Description = "Controls every MPRIS-compatible media player over the D-Bus session bus."
+        Description = "Controls every MPRIS-compatible media player over the D-Bus session bus.",
+        Icon = LoadIcon()
     };
+
+    /// <summary>The plugin icon (icon.png, embedded). Missing data only costs the icon.</summary>
+    private static byte[]? LoadIcon()
+    {
+        using Stream? stream = typeof(MprisPlugin).Assembly.GetManifestResourceStream("LoupixDeck.Plugin.Mpris.icon.png");
+        if (stream == null) return null;
+
+        using MemoryStream buffer = new();
+        stream.CopyTo(buffer);
+        return buffer.ToArray();
+    }
 
     public override void Initialize(IPluginHost host)
     {
